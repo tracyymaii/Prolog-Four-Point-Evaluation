@@ -34,16 +34,19 @@ store_sides(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3), SortedTriList) :-
     DX is X2 - X,                     
     DY is Y2 - Y,                      
     A is sqrt(DX * DX + DY * DY),
-
+    A =\= 0,
 
     DX2 is X3 - X2,                     
     DY2 is Y3 - Y2,                      
     B is sqrt(DX2 * DX2 + DY2 * DY2),
+    B =\= 0,
 
 
     DX3 is X - X3,                     
     DY3 is Y - Y3,                      
-    C is sqrt(DX3 * DX3 + DY3 * DY3),
+    C is sqrt(DX3 * DX3 + DY3 * DY3),        
+    C =\= 0,
+
     
     msort([A, B, C], SortedTriList).
 
@@ -54,30 +57,42 @@ store_lengths_square(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3), point2d(X4, 
     DX is X2 - X,                     
     DY is Y2 - Y,                      
     A is sqrt(DX * DX + DY * DY),
+    A =\= 0,
 
     DX2 is X3 - X2,                     
     DY2 is Y3 - Y2,                      
     B is sqrt(DX2 * DX2 + DY2 * DY2),
+    B =\= 0,
+
 
     DX3 is X4 - X3,                     
     DY3 is Y4 - Y3,                      
     C is sqrt(DX3 * DX3 + DY3 * DY3),
+    C =\= 0,
+
 
     DX4 is X - X4,                     
     DY4 is Y - Y4,                      
     D is sqrt(DX4 * DX4 + DY4 * DY4),
+    D =\= 0,
+
 
     DX5 is X - X3,                     
     DY5 is Y - Y3,                      
     E is sqrt(DX5 * DX5 + DY5 * DY5),
+    E =\= 0,
+
 
     DX6 is X2 - X4,                     
     DY6 is Y2 - Y4,                      
     F is sqrt(DX6 * DX6 + DY6 * DY6),
+    F =\= 0,
+
     
     assert(square_list([A, B, C, D, E, F])).
 
 equilateral(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)) :-
+    \+ right(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)),
     triangle(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)),
     store_sides(point2d(X, Y), point2d(X2, Y2), point2d(X3, Y3), SortedList),   
     nth0(0, SortedList, Side1),
@@ -101,6 +116,7 @@ isosceles(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)) :-
     \+ scalene(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)).
 
 right(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)) :-
+    \+ equilateral(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)),
     triangle(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)),
     store_sides(point2d(X, Y), point2d(X2, Y2), point2d(X3, Y3), SortedList),   
     nth0(0, SortedList, Side1),
