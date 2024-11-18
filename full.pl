@@ -34,11 +34,12 @@ store_sides(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3), SortedTriList) :-
     DX is X2 - X,                     
     DY is Y2 - Y,                      
     A is sqrt(DX * DX + DY * DY),
-    
+
 
     DX2 is X3 - X2,                     
     DY2 is Y3 - Y2,                      
     B is sqrt(DX2 * DX2 + DY2 * DY2),
+
 
     DX3 is X - X3,                     
     DY3 is Y - Y3,                      
@@ -113,7 +114,9 @@ acute(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)) :-
     nth0(0, SortedList, Side1),
     nth0(1, SortedList, Side2),
     nth0(2, SortedList, Side3),
-    Side1^2 + Side2^2 > Side3^2.
+    Side1^2 + Side2^2 > Side3^2,
+    \+ is_close(Side1^2 + Side2^2, Side3^2).
+
 
 obtuse(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)) :-
     triangle(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)),
@@ -146,3 +149,97 @@ is_close(A, B) :-
     Epsilon = 1.0e-6,
     Diff is abs(A - B),
     Diff =< Epsilon.
+
+query(line(point2d(0,0), point2d(2,4), point2d(5,0))).
+query(line(point2d(0,0), point2d(3,2), point2d(6,4))).
+query(line(point2d(0,0), point2d(5,0), point2d(2.5,sqrt(18.75)))).
+
+
+query(triangle(point2d(0,0), point2d(2,4), point2d(5,0))).
+query(triangle(point2d(0,0), point2d(3,2), point2d(6,4))).
+query(triangle(point2d(0,0), point2d(5,0), point2d(2.5,sqrt(18.75)))).
+
+
+query(equilateral(point2d(0,0), point2d(2,4), point2d(5,0))).
+query(isosceles(point2d(0,0), point2d(2,4), point2d(5,0))).
+query(right(point2d(0,0), point2d(2,4), point2d(5,0))).
+query(scalene(point2d(0,0), point2d(2,4), point2d(5,0))).
+query(acute(point2d(0,0), point2d(2,4), point2d(5,0))).
+query(obtuse(point2d(0,0), point2d(2,4), point2d(5,0))).
+
+query(equilateral(point2d(0,0), point2d(5,0), point2d(2.5,sqrt(18.75)))).
+query(isosceles(point2d(0,0), point2d(5,0), point2d(2.5,sqrt(18.75)))).
+query(right(point2d(0,0), point2d(5,0), point2d(2.5,sqrt(18.75)))).
+query(scalene(point2d(0,0), point2d(5,0), point2d(2.5,sqrt(18.75)))).
+query(acute(point2d(0,0), point2d(5,0), point2d(2.5,sqrt(18.75)))).
+query(obtuse(point2d(0,0), point2d(5,0), point2d(2.5,sqrt(18.75)))).
+
+query(line(point2d(1,2), point2d(2,4), point2d(3,6))).
+query(line(point2d(1,2), point2d(2,4), point2d(3,8))).
+query(line(point2d(1,2), point2d(2,4), point2d(10,20))).
+
+query(vertical(point2d(1,2), point2d(2,4))).
+query(vertical(point2d(1,2), point2d(1,4))).
+query(vertical(point2d(1,2), point2d(3,2))).
+
+query(horizontal(point2d(1,2), point2d(2,4))).
+query(horizontal(point2d(1,2), point2d(1,4))).
+query(horizontal(point2d(1,2), point2d(3,2))).
+
+query(triangle(point2d(1,2), point2d(2,4), point2d(3,6))).
+query(triangle(point2d(1,2), point2d(2,4), point2d(3,8))).
+query(triangle(point2d(1,2), point2d(2,4), point2d(10,20))).
+
+query(triangle(point2d(2,3), point2d(6,3), point2d(4,3 + sqrt(12)))).
+query(equilateral(point2d(2,3), point2d(6,3), point2d(4,3 + sqrt(12)))).
+query(isosceles(point2d(2,3), point2d(6,3), point2d(4,3 + sqrt(12)))).
+query(right(point2d(2,3), point2d(6,3), point2d(4,3 + sqrt(12)))).
+query(scalene(point2d(2,3), point2d(6,3), point2d(4,3 + sqrt(12)))).
+query(acute(point2d(2,3), point2d(6,3), point2d(4,3 + sqrt(12)))).
+query(obtuse(point2d(2,3), point2d(6,3), point2d(4,3 + sqrt(12)))).
+
+query(triangle(point2d(2,2), point2d(5,2), point2d(3.5,-2))).
+query(equilateral(point2d(2,2), point2d(5,2), point2d(3.5,-2))).
+query(isosceles(point2d(2,2), point2d(5,2), point2d(3.5,-2))).
+query(right(point2d(2,2), point2d(5,2), point2d(3.5,-2))).
+query(scalene(point2d(2,2), point2d(5,2), point2d(3.5,-2))).
+query(acute(point2d(2,2), point2d(5,2), point2d(3.5,-2))).
+query(obtuse(point2d(2,2), point2d(5,2), point2d(3.5,-2))).
+
+query(triangle(point2d(0,0), point2d(-2,2), point2d(4,4))).
+query(equilateral(point2d(0,0), point2d(-2,2), point2d(4,4))).
+query(isosceles(point2d(0,0), point2d(-2,2), point2d(4,4))).
+query(right(point2d(0,0), point2d(-2,2), point2d(4,4))).
+query(scalene(point2d(0,0), point2d(-2,2), point2d(4,4))).
+query(acute(point2d(0,0), point2d(-2,2), point2d(4,4))).
+query(obtuse(point2d(0,0), point2d(-2,2), point2d(4,4))).
+
+query(triangle(point2d(1,1), point2d(3,1), point2d(4,3))).
+query(equilateral(point2d(1,1), point2d(3,1), point2d(4,3))).
+query(isosceles(point2d(1,1), point2d(3,1), point2d(4,3))).
+query(right(point2d(1,1), point2d(3,1), point2d(4,3))).
+query(scalene(point2d(1,1), point2d(3,1), point2d(4,3))).
+query(acute(point2d(1,1), point2d(3,1), point2d(4,3))).
+query(obtuse(point2d(1,1), point2d(3,1), point2d(4,3))).
+
+query(triangle(point2d(3,1), point2d(9,1), point2d(6,4))).
+query(equilateral(point2d(3,1), point2d(9,1), point2d(6,4))).
+query(isosceles(point2d(3,1), point2d(9,1), point2d(6,4))).
+query(right(point2d(3,1), point2d(9,1), point2d(6,4))).
+query(scalene(point2d(3,1), point2d(9,1), point2d(6,4))).
+query(acute(point2d(3,1), point2d(9,1), point2d(6,4))).
+query(obtuse(point2d(3,1), point2d(9,1), point2d(6,4))).
+
+query(square(point2d(2,4),point2d(5,7),point2d(8,4),point2d(5,1))). 
+query(square(point2d(2,4),point2d(5,7),point2d(8,4),point2d(5,0))). 
+query(square(point2d(3,1),point2d(2,4),point2d(5,5),point2d(6,2))). 
+query(square(point2d(-1,1),point2d(-1,3),point2d(1,3),point2d(1,0))). 
+query(square(point2d(-1,1),point2d(-1,3),point2d(1,3),point2d(1,1))). 
+query(square(point2d(5,4),point2d(5,1),point2d(2,1),point2d(2,4))). 
+query(square(point2d(2,0),point2d(1,2),point2d(2,4),point2d(3,2))).
+
+
+writeln(T) :- write(T), nl.
+
+main:- forall(query(Q), Q -> (writeln('yes')) ; (writeln('no'))),
+	halt.
