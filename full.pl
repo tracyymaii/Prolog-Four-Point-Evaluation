@@ -144,7 +144,6 @@ Defines an equilateral triangle by checking if all the side lengths are the same
 @output whether or not the triangle is equilateral
 */
 equilateral(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)) :-
-    \+ right(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)),
     triangle(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)),
     store_sides(point2d(X, Y), point2d(X2, Y2), point2d(X3, Y3), SortedList),   
     nth0(0, SortedList, Side1),
@@ -186,7 +185,6 @@ Defines an right triangle by checking the sides lengths match the Pythagoream th
 @output whether or not the triangle is a right triangle
 */
 right(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)) :-
-    \+ equilateral(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)),
     triangle(point2d(X,Y), point2d(X2,Y2), point2d(X3, Y3)),
     store_sides(point2d(X, Y), point2d(X2, Y2), point2d(X3, Y3), SortedList),   
     nth0(0, SortedList, Side1),
@@ -261,7 +259,6 @@ is_close(A, B) :-
     Epsilon = 1.0e-6,
     Diff is abs(A - B),
     Diff =< Epsilon.
-
 query(line(point2d(0,0), point2d(2,4), point2d(5,0))).
 query(line(point2d(0,0), point2d(3,2), point2d(6,4))).
 query(line(point2d(0,0), point2d(5,0), point2d(2.5,sqrt(18.75)))).
