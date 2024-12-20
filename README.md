@@ -29,5 +29,5 @@ Is the triangle obtuse?	| `obtuse(point2d(x,y), point2d(x,y), point2d(x,y))`
 Do the given four points define a square? | `square(point2d(x,y), point2d(x,y), point2d(x,y), point2d(x,y))`
 
 ## To Run
-swipl
+`swipl -s yourfile.pl`
 
