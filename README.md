@@ -28,17 +28,6 @@ Is the triangle acute? |	`acute(point2d(x,y), point2d(x,y), point2d(x,y))`
 Is the triangle obtuse?	| `obtuse(point2d(x,y), point2d(x,y), point2d(x,y))`
 Do the given four points define a square? | `square(point2d(x,y), point2d(x,y), point2d(x,y), point2d(x,y))`
 
+## To Run
+swipl
 
-## Instructions for Testing
-A file named `test.pl` is provided. You will need to append this file to the end of your code, create a new file called `full.pl` that contains your code and then the code from `test.pl`, and then run Prolog from the command line:  
-
-`swipl -q -f full.pl -t main > your-output.txt`
-
-The command tells prolog to run quietly using the file `full.pl` and to execute target `main`. The query main will then run each of the queries. Once the process is finished, there will be a file named `your-output.txt` you can then compare this file with another file that is provided: `output.txt` to check if your results are correct. Before turning in your assignment make sure that your file `fourpoints.pl` does not have test code.
-
-
-Steps to integrate the parser made in Rust:
-1. Create a 4Points Language "program" call it `test.cpl`, define four points, remember to add tests.
-1. Run your parser: `go run . test.cpl -p > mytest.pl`
-1. Paste your generated test to your prolog program: `cat fourpoints.pl mytest.pl > full.pl`
-1. Run your program to check what those point tests in `test.cpl` represent: `swipl -q -f full.pl -t main`
